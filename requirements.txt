@@ -1,0 +1,3 @@
+###### Requirements without Version Specifiers ######`
+flake8
+pygame
