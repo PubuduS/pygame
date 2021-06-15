@@ -19,6 +19,7 @@ class GameGenerics:
         screen = pygame.display.set_mode((height, width))
         return screen
 
+    ## Close screen
     def close_screen(self, event, active=True):
 
         if event.type == KEYDOWN:
