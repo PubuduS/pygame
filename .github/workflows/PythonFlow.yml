@@ -57,7 +57,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: pytest-results-${{ matrix.python-version }}
-          path: main.py
+          path: .
           retention-days: 5
 
       # Deploy the HTML documentation to GitHub Pages

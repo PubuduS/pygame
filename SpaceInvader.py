@@ -6,10 +6,10 @@ class SpaceInvader(GameGenerics):
 
     def __init__(self):
 
-        ## Initialize pygame
+        # Initialize pygame
         super(SpaceInvader, self).__init__()
 
-        ## Icon made by Pixel Buddha from www.flaticon.com
+        # Icon made by Pixel Buddha from www.flaticon.com
         self.set_display_caption_and_icon("Space Invaders", "images/ufo.png")
         self.x_axis = 370
         self.y_axis = 480
@@ -19,7 +19,7 @@ class SpaceInvader(GameGenerics):
     def main_game_loop(self):
 
         active = True
-        ## Icon made by Freepic from www.flaticon.com
+        # Icon made by Freepic from www.flaticon.com
         player_image = "images/space_invaders.png"
         my_player = Player()
         changes = 0
