@@ -5,19 +5,20 @@ class Player(GameGenerics):
 
     ## Constructor for Player class
     # Initialize the class member variables.
+    # space_invaders.png Icon made by Freepic from www.flaticon.com
     def __init__(self):
         super(Player, self).__init__()
+        self.player_image = "images/space_invaders.png"
+        self.player_img = pygame.image.load(self.player_image)
         self.playerX_change = 0
 
     ## Player funtion will draw the image across across screen.
     # param1 (screen): takes a reference to player screen.
-    # param2 (image): takes a player sprite image.
-    # param3 (x_axis): takes the x axis position which is used to draw the image.
-    # param4 (y_axis): takes the y axis position which is used to draw the image.
+    # param2 (x_axis): takes the x axis position which is used to draw the image.
+    # param3 (y_axis): takes the y axis position which is used to draw the image.
     # return void
-    def player(self, screen, image, x_axis=0, y_axis=0):
-        player_img = pygame.image.load(image)
-        screen.blit(player_img, (x_axis, y_axis))
+    def player(self, screen, x_axis=0, y_axis=0):
+        screen.blit(self.player_img, (x_axis, y_axis))
 
     ## player_controls function allows user to calculate the left and right positions of
     # the player sprite. It returns the correct x axis coordinates according to user inputs.
