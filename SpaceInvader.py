@@ -19,6 +19,7 @@ class SpaceInvader(GameGenerics):
         self.x_axis_enemy = random.randint(0, 736)
         self.y_axis_enemy = random.randint(0, 150)
         self.screen = self.get_screen(800, 600)
+        self.background = pygame.image.load("images/background.png")
         self.main_game_loop()
 
     ## main_game_loop will handle all the operations of the game.
@@ -33,6 +34,7 @@ class SpaceInvader(GameGenerics):
         while active:
 
             self.screen.fill((0, 0, 0))
+            self.screen.blit(self.background, (0, 0))
             for event in pygame.event.get():
                 active = self.close_screen(event, active)
                 changes = my_player.player_controls(event)

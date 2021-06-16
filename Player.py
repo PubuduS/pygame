@@ -28,9 +28,9 @@ class Player(GameGenerics):
 
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_LEFT:
-                self.playerX_change = -0.5
+                self.playerX_change = -5
             if event.key == pygame.K_RIGHT:
-                self.playerX_change = 0.5
+                self.playerX_change = 5
 
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:

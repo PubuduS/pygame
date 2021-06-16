@@ -40,9 +40,9 @@ class Enemy(GameGenerics):
             self.flag_move_down = False
 
         if self.flag_move_right:
-            x_axis = 0.2
+            x_axis = 2
         else:
-            x_axis = -0.2
+            x_axis = -2
 
         return x_axis
 
@@ -51,11 +51,9 @@ class Enemy(GameGenerics):
     # return int down_by
     def enemy_move_down_one_row(self, y_axis):
 
-        down_by = 0
         if self.flag_move_down and y_axis <= 510:
             down_by = 40
         else:
             down_by = 0
 
         return down_by
-

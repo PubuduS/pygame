@@ -22,7 +22,7 @@ class GameGenerics:
     # param1 (height): takes the height of the screen.
     # param2 (width): takes the width of the screen.
     # return screen
-    def get_screen(self, height = 250, width = 250):
+    def get_screen(self, height=250, width=250):
         screen = pygame.display.set_mode((height, width))
         return screen
 
@@ -38,7 +38,7 @@ class GameGenerics:
                 active = False
 
         if event.type == pygame.QUIT:
-           active = False
+            active = False
 
         return active
 
@@ -52,4 +52,3 @@ class GameGenerics:
         if image != "default":
             icon = pygame.image.load(image)
             pygame.display.set_icon(icon)
-
