@@ -10,6 +10,8 @@ class Player(GameGenerics):
     # space_invaders.png Icon made by Freepic from www.flaticon.com
     def __init__(self):
         super(Player, self).__init__()
+
+        ## holds a spaceship image.
         self.player_image = "images/space_invaders.png"
         self.bullet_image = "images/bullet.png"
         self.bullet_img = pygame.image.load(self.bullet_image)
@@ -37,8 +39,10 @@ class Player(GameGenerics):
             if event.key == pygame.K_RIGHT:
                 self.playerX_change = 5
 
-            if event.key == pygame.K_SPACE:
-                fire_state = "fire"
+            # We only need to fire bullet when it is in ready state.
+            if fire_state == "ready":
+                if event.key == pygame.K_SPACE:
+                    fire_state = "fire"
 
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
@@ -62,5 +66,10 @@ class Player(GameGenerics):
 
         return x_axis
 
+    ## fire_bullets function draws the bullet across screen
+    # param1 (screen): takes a reference to screen.
+    # param2 (x_axis): takes position of x axis.
+    # param3 (y_axis): takes position of y axis.
+    # return void
     def fire_bullets(self, screen, x_axis, y_axis):
         screen.blit(self.bullet_img, (x_axis + 16, y_axis + 10))

@@ -32,37 +32,45 @@ class SpaceInvader(GameGenerics):
         my_player = Player()
         my_enemy = Enemy()
         changes = 0
-        enemy_x_change = 0
         fire_state = "ready"
 
         while active:
 
-            self.screen.fill((0, 0, 0))
+            # Draw the background as long as our game loop is running
             self.screen.blit(self.background, (0, 0))
 
             for event in pygame.event.get():
                 active = self.close_screen(event, active)
                 control_data = my_player.player_controls(event, fire_state)
                 changes = control_data[0]
-                fire_state = control_data[1]
 
+                # We only need to capture these data when the fire state is ready.
+                # If bullet is currently traveling we don't need these data.
+                if fire_state == "ready":
+                    fire_state = control_data[1]
+                    self.bullet_x_axis = self.x_axis_player
+
+            # Draw the player across screen through x axis.
             self.x_axis_player += changes
             self.x_axis_player = my_player.boundary_control(self.x_axis_player)
             my_player.player(self.screen, self.x_axis_player, self.y_axis_player)
 
+            # Draw the enemy across x and y axis.
             enemy_x_change = my_enemy.enemy_movement(self.x_axis_enemy)
             self.x_axis_enemy += enemy_x_change
             self.y_axis_enemy += my_enemy.enemy_move_down_one_row(self.y_axis_enemy)
             my_enemy.enemy(self.screen, self.x_axis_enemy, self.y_axis_enemy)
 
+            # When fire state is sets to fire, draw the bullet trajectory.
             if fire_state == "fire":
 
                 self.bullet_y_axis -= 4
+                my_player.fire_bullets(self.screen, self.bullet_x_axis, self.bullet_y_axis)
 
-                if self.bullet_y_axis <= -10:
+                # When the bullet goes outside of the border we reset it back to start.
+                if self.bullet_y_axis <= -5:
                     fire_state = "ready"
                     self.bullet_y_axis = 480
 
-                my_player.fire_bullets(self.screen, self.x_axis_player, self.bullet_y_axis)
-
+            # Update everything with new changes.
             pygame.display.update()
