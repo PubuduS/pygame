@@ -46,7 +46,7 @@ class Enemy(GameGenerics):
 
         return x_axis
 
-    ## enemy_move_down_one_row funtion will move enemies one row after reaching rightmost side of our screen.
+    ## enemy_move_down_one_row function will move enemies one row after reaching rightmost side of our screen.
     # param1 (y_axis): takes the position of y axis.
     # return int down_by
     def enemy_move_down_one_row(self, y_axis):
