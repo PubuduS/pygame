@@ -2,6 +2,7 @@ from GameGenerics import *
 from Player import Player
 from Enemy import Enemy
 import random
+import math
 
 
 class SpaceInvader(GameGenerics):
@@ -17,7 +18,7 @@ class SpaceInvader(GameGenerics):
         self.set_display_caption_and_icon("Space Invaders", "images/ufo.png")
         self.x_axis_player = 370
         self.y_axis_player = 480
-        self.x_axis_enemy = random.randint(0, 736)
+        self.x_axis_enemy = random.randint(0, 735)
         self.y_axis_enemy = random.randint(0, 150)
         self.bullet_x_axis = 0
         self.bullet_y_axis = 480
@@ -72,5 +73,44 @@ class SpaceInvader(GameGenerics):
                     fire_state = "ready"
                     self.bullet_y_axis = 480
 
+            fire_state = self.handle_collisions(fire_state, self.is_collide())
+
             # Update everything with new changes.
             pygame.display.update()
+
+    ## is_collide function checks the collusion between bullet and enemy
+    # It returns True if enemy is hit by a bullet.
+    # This function use distant formula to calculate the collusion.
+    # distance = square( (x2 - x1)^2 + (y2-y1)^2 )
+    # return boolean
+    def is_collide(self):
+
+        enemy_x = self.x_axis_enemy
+        enemy_y = self.y_axis_enemy
+        bullet_x = self.bullet_x_axis
+        bullet_y = self.bullet_y_axis
+
+        x_diff_into_two = math.pow(enemy_x - bullet_x, 2)
+        y_diff_into_two = math.pow(enemy_y - bullet_y, 2)
+
+        distance = math.sqrt(x_diff_into_two + y_diff_into_two)
+
+        if distance < 27:
+            return True
+
+        return False
+
+    ## fire_bullets function draws the bullet across screen
+    # param1 (fire_state): takes a reference to fire_state.
+    # param2 (is_collide): takes is_collide flag.
+    # return boolean fire_state
+    def handle_collisions(self, fire_state, is_collide):
+
+        if is_collide:
+
+            fire_state = "ready"
+            self.bullet_y_axis = 480
+            self.x_axis_enemy = random.randint(0, 735)
+            self.y_axis_enemy = random.randint(0, 150)
+
+        return fire_state

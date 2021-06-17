@@ -7,19 +7,21 @@ class Player(GameGenerics):
 
     ## Constructor for Player class
     # Initialize the class member variables.
-    # space_invaders.png Icon made by Freepic from www.flaticon.com
     def __init__(self):
         super(Player, self).__init__()
 
         ## holds a spaceship image.
+        # space_invaders.png Icon made by Freepic from www.flaticon.com
         self.player_image = "images/space_invaders.png"
+
+        ## holds a bullet image.
         self.bullet_image = "images/bullet.png"
         self.bullet_img = pygame.image.load(self.bullet_image)
         self.player_img = pygame.image.load(self.player_image)
         self.playerX_change = 0
         self.control_data = [0, "ready"]
 
-    ## Player funtion will draw the image across across screen.
+    ## Player function will draw the image across across screen.
     # param1 (screen): takes a reference to player screen.
     # param2 (x_axis): takes the x axis position which is used to draw the image.
     # param3 (y_axis): takes the y axis position which is used to draw the image.
