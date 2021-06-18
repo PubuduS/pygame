@@ -18,11 +18,13 @@ class SpaceInvader(GameGenerics):
         self.set_display_caption_and_icon("Space Invaders", "images/ufo.png")
         self.x_axis_player = 370
         self.y_axis_player = 480
-        self.number_of_enemies = 4
+        self.number_of_enemies = 6
         self.x_axis_enemy = []
         self.y_axis_enemy = []
         self.bullet_x_axis = 0
         self.bullet_y_axis = 480
+        self.score = 0
+        self.font = pygame.font.Font("freesansbold.ttf", 32)
         self.collided_enemy_index = 0
         self.screen = self.get_screen(800, 600)
         self.background = pygame.image.load("images/background.png")
@@ -89,7 +91,7 @@ class SpaceInvader(GameGenerics):
                     self.bullet_y_axis = 480
 
             fire_state = self.handle_collisions(fire_state, self.is_collide())
-
+            self.show_score()
             # Update everything with new changes.
             pygame.display.update()
 
@@ -112,6 +114,7 @@ class SpaceInvader(GameGenerics):
 
             if distance < 27:
                 self.collided_enemy_index = i
+                self.score += 5
                 return True
 
         return False
@@ -130,3 +133,12 @@ class SpaceInvader(GameGenerics):
                 self.y_axis_enemy[self.collided_enemy_index] = random.randint(0, 150)
 
         return fire_state
+
+    ## show_score function displays the score
+    # Everytime you killed an enemy, you will earn 5 points.
+    # param1 (text_x_axis): x axis position of the score
+    # param2 (text_y_axis): y axis position of the score
+    # return void
+    def show_score(self, text_x_axis=10, text_y_axis=10):
+        score = self.font.render("Score : " + str(self.score), True, (255, 255, 255))
+        self.screen.blit(score, (text_x_axis, text_y_axis))
