@@ -40,9 +40,9 @@ class Enemy(GameGenerics):
             self.flag_move_down = False
 
         if self.flag_move_right:
-            x_axis = 2
+            x_axis = 1
         else:
-            x_axis = -2
+            x_axis = -1
 
         return x_axis
 

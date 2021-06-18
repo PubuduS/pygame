@@ -31,11 +31,6 @@ class SpaceInvader(GameGenerics):
         self.enemy_starting_pos()
         self.main_game_loop()
 
-    def enemy_starting_pos(self):
-        for i in range(self.number_of_enemies):
-            self.x_axis_enemy.append(random.randint(0, 735))
-            self.y_axis_enemy.append(random.randint(0, 150))
-
     ## main_game_loop will handle all the operations of the game.
     def main_game_loop(self):
 
@@ -44,6 +39,10 @@ class SpaceInvader(GameGenerics):
         my_enemy = Enemy()
         changes = 0
         fire_state = "ready"
+
+        # Background Music
+        mixer.music.load("sound/background.wav")
+        mixer.music.play(-1)
 
         while active:
 
@@ -77,6 +76,16 @@ class SpaceInvader(GameGenerics):
                     for j in range(self.number_of_enemies):
                         self.y_axis_enemy[j] += 40
 
+                # Handle game over logic
+                # Our spaceship y axis position is 480.
+                # When enemy reaches to that position we end the game
+                if self.y_axis_enemy[i] > 440:
+                    for k in range(self.number_of_enemies):
+                        self.y_axis_enemy[k] = 700
+                        self.game_over_scree()
+                    break
+
+                # Draw the enemy
                 my_enemy.enemy(self.screen, self.x_axis_enemy[i], self.y_axis_enemy[i])
 
             # When fire state is sets to fire, draw the bullet trajectory.
@@ -115,6 +124,8 @@ class SpaceInvader(GameGenerics):
             if distance < 27:
                 self.collided_enemy_index = i
                 self.score += 5
+                explosion_sound = mixer.Sound("sound/explosion.wav")
+                explosion_sound.play()
                 return True
 
         return False
@@ -142,3 +153,18 @@ class SpaceInvader(GameGenerics):
     def show_score(self, text_x_axis=10, text_y_axis=10):
         score = self.font.render("Score : " + str(self.score), True, (255, 255, 255))
         self.screen.blit(score, (text_x_axis, text_y_axis))
+
+    ## enemy_starting_pos function calculate the stating position of the enemy.
+    # The starting position will be random for each turn.
+    # return void
+    def enemy_starting_pos(self):
+        for i in range(self.number_of_enemies):
+            self.x_axis_enemy.append(random.randint(0, 735))
+            self.y_axis_enemy.append(random.randint(0, 150))
+
+    ## game_over_scree function display the game over screen after enemies reached to our spaceship.
+    # return void
+    def game_over_scree(self):
+        game_over_font = pygame.font.Font("freesansbold.ttf", 64)
+        game_over_text = game_over_font.render("GAME OVER", True, (255, 255, 255))
+        self.screen.blit(game_over_text, (200, 250))

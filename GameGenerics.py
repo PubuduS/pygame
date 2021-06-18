@@ -1,4 +1,5 @@
 import pygame
+from pygame import mixer
 
 from pygame.locals import (
     K_UP,
