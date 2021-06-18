@@ -18,13 +18,21 @@ class SpaceInvader(GameGenerics):
         self.set_display_caption_and_icon("Space Invaders", "images/ufo.png")
         self.x_axis_player = 370
         self.y_axis_player = 480
-        self.x_axis_enemy = random.randint(0, 735)
-        self.y_axis_enemy = random.randint(0, 150)
+        self.number_of_enemies = 4
+        self.x_axis_enemy = []
+        self.y_axis_enemy = []
         self.bullet_x_axis = 0
         self.bullet_y_axis = 480
+        self.collided_enemy_index = 0
         self.screen = self.get_screen(800, 600)
         self.background = pygame.image.load("images/background.png")
+        self.enemy_starting_pos()
         self.main_game_loop()
+
+    def enemy_starting_pos(self):
+        for i in range(self.number_of_enemies):
+            self.x_axis_enemy.append(random.randint(0, 735))
+            self.y_axis_enemy.append(random.randint(0, 150))
 
     ## main_game_loop will handle all the operations of the game.
     def main_game_loop(self):
@@ -57,10 +65,17 @@ class SpaceInvader(GameGenerics):
             my_player.player(self.screen, self.x_axis_player, self.y_axis_player)
 
             # Draw the enemy across x and y axis.
-            enemy_x_change = my_enemy.enemy_movement(self.x_axis_enemy)
-            self.x_axis_enemy += enemy_x_change
-            self.y_axis_enemy += my_enemy.enemy_move_down_one_row(self.y_axis_enemy)
-            my_enemy.enemy(self.screen, self.x_axis_enemy, self.y_axis_enemy)
+            for i in range(self.number_of_enemies):
+                enemy_x_change = my_enemy.enemy_movement(self.x_axis_enemy[i])
+                self.x_axis_enemy[i] += enemy_x_change
+
+                # if one enemy hit left all the enemies move down by 1 row or 40 pixel
+                move_down = my_enemy.enemy_move_down_one_row(self.y_axis_enemy[i])
+                if move_down == 40:
+                    for j in range(self.number_of_enemies):
+                        self.y_axis_enemy[j] += 40
+
+                my_enemy.enemy(self.screen, self.x_axis_enemy[i], self.y_axis_enemy[i])
 
             # When fire state is sets to fire, draw the bullet trajectory.
             if fire_state == "fire":
@@ -85,18 +100,19 @@ class SpaceInvader(GameGenerics):
     # return boolean
     def is_collide(self):
 
-        enemy_x = self.x_axis_enemy
-        enemy_y = self.y_axis_enemy
-        bullet_x = self.bullet_x_axis
-        bullet_y = self.bullet_y_axis
+        for i in range(self.number_of_enemies):
 
-        x_diff_into_two = math.pow(enemy_x - bullet_x, 2)
-        y_diff_into_two = math.pow(enemy_y - bullet_y, 2)
+            bullet_x = self.bullet_x_axis
+            bullet_y = self.bullet_y_axis
 
-        distance = math.sqrt(x_diff_into_two + y_diff_into_two)
+            x_diff_into_two = math.pow(self.x_axis_enemy[i] - bullet_x, 2)
+            y_diff_into_two = math.pow(self.y_axis_enemy[i] - bullet_y, 2)
 
-        if distance < 27:
-            return True
+            distance = math.sqrt(x_diff_into_two + y_diff_into_two)
+
+            if distance < 27:
+                self.collided_enemy_index = i
+                return True
 
         return False
 
@@ -107,10 +123,10 @@ class SpaceInvader(GameGenerics):
     def handle_collisions(self, fire_state, is_collide):
 
         if is_collide:
-
-            fire_state = "ready"
-            self.bullet_y_axis = 480
-            self.x_axis_enemy = random.randint(0, 735)
-            self.y_axis_enemy = random.randint(0, 150)
+            for i in range(self.number_of_enemies):
+                fire_state = "ready"
+                self.bullet_y_axis = 480
+                self.x_axis_enemy[self.collided_enemy_index] = random.randint(0, 735)
+                self.y_axis_enemy[self.collided_enemy_index] = random.randint(0, 150)
 
         return fire_state
