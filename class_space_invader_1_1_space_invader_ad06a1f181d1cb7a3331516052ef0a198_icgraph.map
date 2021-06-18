@@ -1,0 +1,4 @@
+<map id="handle_collisions" name="handle_collisions">
+<area shape="rect" id="node1" title="fire_bullets function draws the bullet across screen param1 (fire_state): takes a reference to fire_s..." alt="" coords="173,5,295,32"/>
+<area shape="rect" id="node2" href="$class_space_invader_1_1_space_invader.html#a68c8800e3cf045b20095296f7895081e" title="main_game_loop will handle all the operations of the game." alt="" coords="5,5,125,32"/>
+</map>

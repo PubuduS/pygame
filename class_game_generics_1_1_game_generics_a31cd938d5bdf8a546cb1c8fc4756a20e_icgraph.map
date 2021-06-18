@@ -1,0 +1,4 @@
+<map id="close_screen" name="close_screen">
+<area shape="rect" id="node1" title="close_screen function allows user to close the game screen by clicking quit or pressing Esc key." alt="" coords="269,13,368,39"/>
+<area shape="rect" id="node2" href="$class_space_invader_1_1_space_invader.html#a68c8800e3cf045b20095296f7895081e" title="main_game_loop will handle all the operations of the game." alt="" coords="5,5,221,47"/>
+</map>

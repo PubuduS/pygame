@@ -1,0 +1,8 @@
+<map id="main_game_loop" name="main_game_loop">
+<area shape="rect" id="node1" title="main_game_loop will handle all the operations of the game." alt="" coords="5,122,125,149"/>
+<area shape="rect" id="node2" href="$class_game_generics_1_1_game_generics.html#a31cd938d5bdf8a546cb1c8fc4756a20e" title="close_screen function allows user to close the game screen by clicking quit or pressing Esc key." alt="" coords="173,5,407,47"/>
+<area shape="rect" id="node3" href="$class_space_invader_1_1_space_invader.html#adfba2c8b00a2e44869a674f3bba89803" title="game_over_scree function display the game over screen after enemies reached to our spaceship." alt="" coords="227,71,353,98"/>
+<area shape="rect" id="node4" href="$class_space_invader_1_1_space_invader.html#ad06a1f181d1cb7a3331516052ef0a198" title="fire_bullets function draws the bullet across screen param1 (fire_state): takes a reference to fire_s..." alt="" coords="229,122,351,149"/>
+<area shape="rect" id="node5" href="$class_space_invader_1_1_space_invader.html#a145c3ace2350653a41cd5ed17037c97e" title="is_collide function checks the collusion between bullet and enemy It returns True if enemy is hit by ..." alt="" coords="252,173,328,199"/>
+<area shape="rect" id="node6" href="$class_space_invader_1_1_space_invader.html#a6c15c75208c3fad8a38a324df7298e29" title="show_score function displays the score Everytime you killed an enemy, you will earn 5 points." alt="" coords="244,223,336,250"/>
+</map>
